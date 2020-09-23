@@ -71,35 +71,35 @@ void Copy (int new[size][size],int old[size][size]) //Copying the matrix
     }
 }
 
-void Bomb (int mat[size][size],int row,int colum) //Recursive function to delete the holes you find :)
+void Bomb (int mat[size][size],int row,int column) //Recursive function to delete the holes you find :)
 {
-	mat[row][colum]=0;
+	mat[row][column]=0;
 	if(row!=0)
 	{
-		if(mat[row-1][colum] == 1)
+    	if(mat[row-1][column] == 1)
+    	{
+    		Bomb(mat,row-1,column);
+    	}
+	}
+	if(row!=(size-1))
+	{
+    	if(mat[row+1][column] == 1)
+    	{
+    		Bomb(mat,row+1,column);
+    	}
+	}
+	if(column!=0)
+	{
+		if(mat[row][column-1] == 1)
 		{
-			Bomb(mat,row-1,colum);
+			Bomb(mat,row,column-1);
 		}
 	}
-	else if(row!=size)
+	if(column!=(size-1))
 	{
-		if(mat[row+1][colum] == 1)
+		if(mat[row][column+1] == 1)
 		{
-			Bomb(mat,row+1,colum);
-		}
-	}
-	if(colum!=0)
-	{
-		if(mat[row][colum-1] == 1)
-		{
-			Bomb(mat,row,colum-1);
-		}
-	}
-	else if(colum!=size-1)
-	{
-		if(mat[row][colum+1] == 1)
-		{
-			Bomb(mat,row,colum+1);
+			Bomb(mat,row,column+1);
 		}
 	}
 }
